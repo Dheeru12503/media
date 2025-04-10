@@ -22,3 +22,19 @@ A powerful **Social Media Blogging Platform** built with the **MERN Stack**, off
 1. Open your terminal and navigate to the backend folder:
    ```sh
    cd Backend
+2. To run server:
+
+   ```sh
+   npm run dev
+   ```
+
+### 🔹2️⃣ Frontend Setup
+
+1. Open the terminal and navigate to the backend folder:
+   ```sh
+   cd TodoListApp
+   ```
+2. To start :  
+   ```sh
+   npm start
+   ```
