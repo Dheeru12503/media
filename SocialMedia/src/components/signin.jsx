@@ -22,7 +22,10 @@ const SignIn = () => {
     };
 
     axios
-      .post(`http://localhost:3000/api/v1/signin`, userData)
+      .post(
+        `https://social-media-blog-web.onrender.com/api/v1/signin`,
+        userData
+      )
       .then((res) => {
         console.log(res);
         // console.log(res.data.userId.profileImage);
