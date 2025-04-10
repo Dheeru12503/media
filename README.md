@@ -25,14 +25,14 @@ A powerful **Social Media Blogging Platform** built with the **MERN Stack**, off
 2. To run server:
 
    ```sh
-   npm run dev
+   npm start
    ```
 
 ### 🔹2️⃣ Frontend Setup
 
 1. Open the terminal and navigate to the backend folder:
    ```sh
-   cd TodoListApp
+   cd SocialMedia
    ```
 2. To start :  
    ```sh
