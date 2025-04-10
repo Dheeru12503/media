@@ -1,0 +1,23 @@
+.sideBar{
+     @media (max-width: 600px) {
+    display: none;
+  }
+}
+.sidetoggle{
+    display: none;
+     position: absolute;
+    left: 6%;
+    top: 8%;
+    @media (max-width: 600px) {
+        display: block;
+       
+        color: white;
+        height: 6%;
+        width: 6%;
+        
+  }
+}
+.dropdown-toggle::after {
+  display: none;
+}
+
