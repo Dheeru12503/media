@@ -15,7 +15,7 @@ const postListReducer = (currPostList, action) => {
   if (action.type === "DELETE_POST") {
     axios
       .delete(
-        `http://localhost:3000/api/v1/deletepost/${action.payload.postId}`
+        `https://social-media-blog-web.onrender.com/api/v1/deletepost/${action.payload.postId}`
       )
       .then((res) => {
         console.log(res);
@@ -71,7 +71,9 @@ const PostListProvider = ({ children }) => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    fetch(`http://localhost:3000/api/v1/getallpost`, { signal })
+    fetch(`https://social-media-blog-web.onrender.com/api/v1/getallpost`, {
+      signal,
+    })
       .then((res) => {
         // Check if the request was already completed before attempting to parse the response
         if (!res.ok) {

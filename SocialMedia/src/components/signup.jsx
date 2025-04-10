@@ -39,11 +39,15 @@ const SignUp = () => {
     }
 
     axios
-      .post(`http://localhost:3000/api/v1/SignUp`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(
+        `https://social-media-blog-web.onrender.com/api/v1/SignUp`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
         navigate("/SignIn");
