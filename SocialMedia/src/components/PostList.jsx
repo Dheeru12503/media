@@ -6,7 +6,6 @@ import Loader from "./Loader";
 
 const PostList = () => {
   const { postList,fetching , profileImage} = useContext(PostListData);
-  console.log("this is profile image ", profileImage);
   return (
     <>
     {/* <div>{profileImage}</div> */}

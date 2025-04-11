@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useReducer, useState } from "react";
-
+  export const apiURL = import.meta.env.VITE_API_URL;
 export const PostList = createContext({
   
   isAuthenticated: false,
@@ -14,9 +14,7 @@ const postListReducer = (currPostList, action) => {
   let newPostList = currPostList;
   if (action.type === "DELETE_POST") {
     axios
-      .delete(
-        `https://social-media-blog-web.onrender.com/api/v1/deletepost/${action.payload.postId}`
-      )
+      .delete(`${apiURL}/deletepost/${action.payload.postId}`)
       .then((res) => {
         console.log(res);
       })
@@ -71,7 +69,7 @@ const PostListProvider = ({ children }) => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    fetch(`https://social-media-blog-web.onrender.com/api/v1/getallpost`, {
+    fetch(`${apiURL}/getallpost`, {
       signal,
     })
       .then((res) => {

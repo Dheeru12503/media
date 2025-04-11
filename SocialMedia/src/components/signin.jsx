@@ -2,7 +2,7 @@ import { useContext, useRef } from "react";
 import "./signin.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { PostList } from "../store/post-list-store";
+import { apiURL, PostList } from "../store/post-list-store";
 const SignIn = () => {
   const { profileImage, setprofileImage,isAuthenticated, setIsAuthenticated } =
     useContext(PostList);
@@ -23,7 +23,7 @@ const SignIn = () => {
 
     axios
       .post(
-        `https://social-media-blog-web.onrender.com/api/v1/signin`,
+        `${apiURL}/signin`,
         userData
       )
       .then((res) => {

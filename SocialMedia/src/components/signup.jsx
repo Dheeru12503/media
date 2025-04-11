@@ -4,6 +4,7 @@ import "./signup.css";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
+import { apiURL } from "../store/post-list-store";
 const SignUp = () => {
   const navigate = useNavigate();
   const userName = useRef();
@@ -39,15 +40,11 @@ const SignUp = () => {
     }
 
     axios
-      .post(
-        `https://social-media-blog-web.onrender.com/api/v1/SignUp`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .post(`${apiURL}/SignUp`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         console.log(res);
         navigate("/SignIn");
