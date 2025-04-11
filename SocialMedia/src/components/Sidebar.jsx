@@ -38,8 +38,8 @@ const Sidebar = ({ selectedTab, setSelectedTab }) => {
           </a>
           <hr />
           <ul className="nav nav-pills flex-column mb-auto">
-            {sidebarList.map((side) => (
-              <li className="nav-item" onClick={() => HandleonClick(side)}>
+            {sidebarList.map((side , index) => (
+              <li key={index} className="nav-item" onClick={() => HandleonClick(side)}>
                 <Link
                   to={`/${handleSideChange(side)}`}
                   className={`nav-link text-white ${

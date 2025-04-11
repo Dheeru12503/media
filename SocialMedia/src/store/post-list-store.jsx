@@ -1,10 +1,11 @@
 import axios from "axios";
 import { createContext, useEffect, useReducer, useState } from "react";
-
+export const apiURL = import.meta.env.VITE_API_URL;
 export const PostList = createContext({
-  
   isAuthenticated: false,
   postList: [],
+  userInfoData: {},
+  setuserInfoData: () => {},
   fetching: false,
   addPost: () => {},
   deletePost: () => {},
@@ -14,9 +15,7 @@ const postListReducer = (currPostList, action) => {
   let newPostList = currPostList;
   if (action.type === "DELETE_POST") {
     axios
-      .delete(
-        `https://social-media-blog-web.onrender.com/api/v1/deletepost/${action.payload.postId}`
-      )
+      .delete(`${apiURL}/deletepost/${action.payload.postId}`)
       .then((res) => {
         console.log(res);
       })
@@ -38,8 +37,8 @@ const postListReducer = (currPostList, action) => {
 const PostListProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [postList, dispatchPostList] = useReducer(postListReducer, []);
-  const [profileImage, setprofileImage] = useState();
   const [fetching, setFetching] = useState(false);
+  const [userInfoData, setuserInfoData] = useState({});
 
   const addPost = (post) => {
     dispatchPostList({
@@ -67,11 +66,25 @@ const PostListProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userData = localStorage.getItem("userMeta");
+    if (token?.split(".").length == 3) {
+      setIsAuthenticated(false);
+    } else {
+      setIsAuthenticated(true);
+    }
+    if (userData) {
+      const parsedata = JSON.parse(userData);
+      setuserInfoData(parsedata);
+    }
+  }, []);
+
+  useEffect(() => {
     setFetching(true);
     const controller = new AbortController();
     const signal = controller.signal;
 
-    fetch(`https://social-media-blog-web.onrender.com/api/v1/getallpost`, {
+    fetch(`${apiURL}/getallpost`, {
       signal,
     })
       .then((res) => {
@@ -110,8 +123,8 @@ const PostListProvider = ({ children }) => {
   return (
     <PostList.Provider
       value={{
-        profileImage,
-        setprofileImage,
+        userInfoData,
+        setuserInfoData,
         postList,
         fetching,
         addPost,

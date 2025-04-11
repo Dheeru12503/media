@@ -2,11 +2,10 @@ import { useContext, useRef } from "react";
 import "./signin.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { PostList } from "../store/post-list-store";
+import { apiURL, PostList } from "../store/post-list-store";
 const SignIn = () => {
-  const { profileImage, setprofileImage,isAuthenticated, setIsAuthenticated } =
-    useContext(PostList);
-  
+  const { setIsAuthenticated, setuserInfoData } = useContext(PostList);
+
   const navigate = useNavigate();
   const userEmail = useRef();
   const userPassword = useRef();
@@ -22,23 +21,31 @@ const SignIn = () => {
     };
 
     axios
-      .post(
-        `https://social-media-blog-web.onrender.com/api/v1/signin`,
-        userData
-      )
+      .post(`${apiURL}/signin`, userData)
       .then((res) => {
         console.log(res);
-        // console.log(res.data.userId.profileImage);
-        setprofileImage(res.data.userId.profileImage);
         localStorage.setItem("token", res.data.token);
-        setIsAuthenticated(true);
+        setIsAuthenticated(false);
+
+        localStorage.setItem(
+          "userMeta",
+          JSON.stringify({
+            name: res.data.userId.name,
+            profileImage: res.data.userId.profileImage,
+          })
+        );
+        const userInfoData = {
+          name: res.data.userId.name,
+          profileImage: res.data.userId.profileImage,
+        };
+        setuserInfoData(userInfoData);
         navigate("/");
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  
+
   return (
     <>
       <form className="SignIn">

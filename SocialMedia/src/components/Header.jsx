@@ -4,19 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { PostList } from "../store/post-list-store";
 const Header = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, setIsAuthenticated } = useContext(PostList);
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token?.split(".").length == 3) {
-      console.log("token is present");
-      setIsAuthenticated(false);
-    } else {
-      setIsAuthenticated(true);
-      console.log("token is not present");
-    }
-  }, []);
+  const { isAuthenticated, setIsAuthenticated  , userInfoData} = useContext(PostList);
+
   const handleOnSignOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userMeta");
     setIsAuthenticated(true);
     navigate("/SignIn");
   };
@@ -93,13 +85,13 @@ const Header = () => {
               title={
                 <span className="d-flex align-items-center text-white">
                   <img
-                    src="https://github.com/mdo.png"
-                    alt=""
+                    src={userInfoData.profileImage || "https://via.placeholder.com/32"}
+                    alt="Profile"
                     width="32"
                     height="32"
                     className="rounded-circle me-2"
                   />
-                  <strong>name</strong>
+                  <strong>{userInfoData.name}</strong>
                 </span>
               }
               id="nav-dropdown"
