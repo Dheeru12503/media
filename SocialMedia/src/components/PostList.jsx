@@ -5,10 +5,10 @@ import WelcomeMessage from "./WecomeMessage";
 import Loader from "./Loader";
 
 const PostList = () => {
-  const { postList,fetching , profileImage} = useContext(PostListData);
+  const { postList,fetching } = useContext(PostListData);
   return (
     <>
-    {/* <div>{profileImage}</div> */}
+  
       <div className="PostList">
         {fetching && <Loader></Loader>}
         {!fetching && postList.length === 0 && <WelcomeMessage />}
